@@ -85,7 +85,7 @@ export class PatientEditComponent implements OnInit {
                 })
             }
             if (this.entity.extra && this.entity.extra.prep) {
-                this.prep = true;
+                this.prep = !!this.entity.extra.prep.registered;
                 this.indicationForPrep = this.entity.extra.prep.indicationForPrep;
                 this.prepId = this.entity.extra.prep.prepId;
                 this.onDemandIndication = this.entity.extra.prep.onDemandIndication;
@@ -112,6 +112,7 @@ export class PatientEditComponent implements OnInit {
 
             this.patientForm.form.setErrors({'invalid': true});
             this.patientForm.form.markAllAsTouched();
+            this.patientForm.form.markAsDirty()
         });
 
         this.patientService.getStates().subscribe(res => this.states = res);
